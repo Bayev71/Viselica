@@ -2,6 +2,7 @@ import random
 from turtle import *
 from words import gameWords
 
+
 def draw_line(point1, point2, size=10, p_color="black"):
     oldPenSize = pen()["pensize"]
     oldColor = pen()["pencolor"]
@@ -57,6 +58,7 @@ def draw_secret(word):
         secretWordCoords.append([startPoint[0] + (lenSquare // 2), startPoint[1] - lenSquare])
         startPoint[0] += lenSquare + interval
 
+
 def draw_alphabet():
     global alphabet_dict
     alphabet = ('А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У',
@@ -71,7 +73,6 @@ def draw_alphabet():
         write(alphabet[i], align="center", font=("Comic Sans MS", 40, "bold"))
         alphabet_dict[alphabet[i]] = (xcor(), ycor() + 30)
         x += 100
-
 
 
 def draw_errors(numError):
@@ -109,7 +110,7 @@ def check_game_status(scoreWin, scoreUser, numError):
 def get_letter_onclick(x, y):
     global alphabet_dict
     for key, centerCoord in alphabet_dict.items():
-        if abs(centerCoord[0] - x) < 100//2 and abs(centerCoord[1] - y) < 80 // 2:
+        if abs(centerCoord[0] - x) < 100 // 2 and abs(centerCoord[1] - y) < 80 // 2:
             print(key)
             goto(alphabet_dict.pop(key))
             dot(84, "white")
@@ -137,20 +138,20 @@ def check_letter(letter):
 def end_game(titleColor, titlePhrase):
     alphabet_dict.clear()
     clear()
-    goto(0, 200+50)
+    goto(0, 200 + 50)
     pencolor(titleColor)
     write(titlePhrase, align="center", font=("Comic Sans MS", 55, "bold"))
     pencolor("black")
-    goto(0, 0+50)
+    goto(0, 0 + 50)
     write("Загаданное слово:", align="center", font=("Comic Sans MS", 30, "bold"))
-    goto(0, -100+50)
+    goto(0, -100 + 50)
     write(secret, align="center", font=("Comic Sans MS", 55, "bold"))
-    goto(0, -300+100)
+    goto(0, -300 + 100)
     write("Желаете повторить?", align="center", font=("Comic Sans MS", 55, "bold"))
-    goto(-200, -400+100)
+    goto(-200, -400 + 100)
     pencolor("green")
     write("ДА", align="center", font=("Comic Sans MS", 55, "bold"))
-    goto(200, -400+100)
+    goto(200, -400 + 100)
     pencolor("red")
     write("НЕТ", align="center", font=("Comic Sans MS", 55, "bold"))
     pencolor("black")
@@ -163,18 +164,14 @@ countErrors = 0
 alphabet_dict = {}
 secretWordCoords = []
 
-
 Screen().setup(1200, 768)
 
 shape("turtle")
 speed(0)
 penup()
 
-
 draw_secret(secret)
 draw_alphabet()
-
-
 
 onscreenclick(get_letter_onclick)
 mainloop()
